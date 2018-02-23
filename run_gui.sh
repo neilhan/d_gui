@@ -13,7 +13,7 @@ docker run --rm -it \
         --volume="$PWD/home:/home" \
         --workdir="/home/$USER" \
 	--privileged \
-	dev /usr/bin/firefox # chromium-browser
+	d_gui /usr/bin/firefox # chromium-browser
 
 	# -v $HOME/.config/app:/root/.config/app \
 	# --cap-add=SYS_ADMIN \ ### this gets chrome and firefox working
