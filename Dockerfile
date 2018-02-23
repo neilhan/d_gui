@@ -7,7 +7,7 @@ LABEL RUN='docker run -d -p 5901:5901 -v /etc/machine-id:/etc/machine-id:ro $IMA
 # Install the appropriate software
 RUN dnf -y update 
 RUN dnf -y groupinstall gnome-desktop
-RUN dnf -y install tmux git vim gvim maven util-linux-user zsh rsync dpkg
+RUN dnf -y install tmux git vim gvim maven util-linux-user zsh rsync dpkg gnupg
 
 RUN dnf -y install firefox
 RUN dnf -y install chromium
