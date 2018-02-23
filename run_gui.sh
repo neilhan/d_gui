@@ -8,9 +8,13 @@ docker run --rm -it \
 	--device /dev/video0 \
 	--device /dev/input \
 	-v /etc/localtime:/etc/localtime:ro \
+	--net=host \
         --user=$USER \
 	--volume="/dev/shm:/dev/shm" \
         --volume="$PWD/home:/home" \
+        --volume="/home/nhan2/bin:/home/nhan2/bin" \
+        --volume="/home/nhan2/Downloads:/home/nhan2/Downloads" \
+        --volume="/home/nhan2/Projects:/home/nhan2/Projects" \
         --workdir="/home/$USER" \
 	--privileged \
 	d_gui /usr/bin/zsh # /usr/bin/gnome-terminal # /usr/bin/firefox # chromium-browser
