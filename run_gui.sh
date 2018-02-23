@@ -18,7 +18,7 @@ docker run --rm -it \
         --volume="/home/nhan2/.m2:/home/nhan2/.m2" \
         --workdir="/home/$USER" \
 	--privileged \
-	d_gui /usr/bin/zsh # /usr/bin/gnome-terminal # /usr/bin/firefox # chromium-browser
+	d_gui # /usr/bin/zsh # /usr/bin/gnome-terminal # /usr/bin/firefox # chromium-browser
 
 	# -v $HOME/.config/app:/root/.config/app \
 	# --cap-add=SYS_ADMIN \ ### this gets chrome and firefox working
