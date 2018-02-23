@@ -17,13 +17,13 @@ RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.mi
 RUN dnf check-update
 RUN dnf -y install code
 
-# !!! Please replace nhan2 with your User and Group !!!
-RUN groupadd --gid 1000 nhan2 \
-  && useradd --uid 1000 --gid nhan2 --shell /usr/bin/zsh --create-home nhan2 \
-  && usermod nhan2 -a -G wheel 
 
-    # echo "nhan2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nhan2 && \
-    # chmod 0440 /etc/sudoers.d/nhan2 && \
+# !!! Please replace nhan2 with your User and Group !!!
+RUN export username=nhan2 \
+  && groupadd --gid 1000 $username \
+  && useradd --uid 1000 --gid $username --shell /usr/bin/zsh --create-home $username \
+  && usermod $username -a -G wheel 
+
 
 # node.js 6 install
 # ----------------------------------------------------
