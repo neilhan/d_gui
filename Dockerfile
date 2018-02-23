@@ -17,11 +17,19 @@ RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.mi
 RUN dnf check-update
 RUN dnf -y install code
 
+# !!! Please replace nhan2 with your User and Group !!!
+RUN groupadd --gid 1000 nhan2 \
+  && useradd --uid 1000 --gid nhan2 --shell /usr/bin/zsh --create-home nhan2 \
+  && usermod nhan2 -a -G wheel 
+
+    # echo "nhan2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nhan2 && \
+    # chmod 0440 /etc/sudoers.d/nhan2 && \
+
 # node.js 6 install
 # ----------------------------------------------------
 # copy from docker node 6.11 ------
-RUN groupadd --gid 1000 node \
-  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+# RUN groupadd --gid 1000 node \
+#   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
@@ -78,17 +86,7 @@ RUN set -ex \
 ### CMD [ "node" ]
 # node 6 ends // ----------------------------------------------------
 
-# !!! Please replace nhan2 with your User and Group !!!
-RUN export uid=1000 gid=1000 && \
-    mkdir -p /home/nhan2 && \
-    echo "nhan2:x:${uid}:${gid}:nhan2,,,:/home/nhan2:/usr/bin/zsh" >> /etc/passwd && \
-    echo "nhan2:x:${uid}:" >> /etc/group && \
-    usermod nhan2 -a -G wheel  && \
-    chown ${uid}:${gid} -R /home/nhan2
-
-    # echo "nhan2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nhan2 && \
-    # chmod 0440 /etc/sudoers.d/nhan2 && \
-
+# set bigger font for gnome
 RUN su nhan2 -c "gsettings set org.gnome.desktop.interface text-scaling-factor 1.5"
 
 USER nhan2

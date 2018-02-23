@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# for volumes, please keep /dev/shm. the rest is your choice. 
+# --cap-add=SYS_ADMIN \ ### this gets chrome and firefox working
+# --privileged  ### have the same effect, chrome, firefox can run now.
 docker run --rm -it \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e DISPLAY \
@@ -16,13 +19,12 @@ docker run --rm -it \
         --volume="/home/nhan2/Downloads:/home/nhan2/Downloads" \
         --volume="/home/nhan2/Projects:/home/nhan2/Projects" \
         --volume="/home/nhan2/.m2:/home/nhan2/.m2" \
+	--volume="/home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3" \
         --workdir="/home/$USER" \
 	--privileged \
 	d_gui # /usr/bin/zsh # /usr/bin/gnome-terminal # /usr/bin/firefox # chromium-browser
 
 	# -v $HOME/.config/app:/root/.config/app \
-	# --cap-add=SYS_ADMIN \ ### this gets chrome and firefox working
-	# --privileged  ### have the same effect, chrome, firefox can run now.
 
 # docker run -it \
 #     --user=$USER \
