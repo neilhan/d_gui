@@ -15,6 +15,7 @@ docker run --rm -it \
         --volume="/home/nhan2/bin:/home/nhan2/bin" \
         --volume="/home/nhan2/Downloads:/home/nhan2/Downloads" \
         --volume="/home/nhan2/Projects:/home/nhan2/Projects" \
+        --volume="/home/nhan2/.m2:/home/nhan2/.m2" \
         --workdir="/home/$USER" \
 	--privileged \
 	d_gui /usr/bin/zsh # /usr/bin/gnome-terminal # /usr/bin/firefox # chromium-browser

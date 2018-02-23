@@ -28,6 +28,8 @@ RUN export uid=1000 gid=1000 && \
     # echo "nhan2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nhan2 && \
     # chmod 0440 /etc/sudoers.d/nhan2 && \
 
+RUN su nhan2 -c "gsettings set org.gnome.desktop.interface text-scaling-factor 1.5"
+
 USER nhan2
 ENV HOME /home/nhan2
 CMD /usr/bin/zsh
