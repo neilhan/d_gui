@@ -11,6 +11,7 @@ docker run --rm -it \
 	--device /dev/video0 \
 	--device /dev/input \
 	-v /etc/localtime:/etc/localtime:ro \
+	-v /etc/hosts:/etc/hosts:ro \
 	--net=host \
         --user=$USER \
 	--volume="/dev/shm:/dev/shm" \

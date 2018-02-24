@@ -8,13 +8,14 @@ LABEL RUN='docker run -d -p 5901:5901 -v /etc/machine-id:/etc/machine-id:ro $IMA
 RUN dnf -y update 
 RUN dnf -y groupinstall gnome-desktop
 RUN dnf -y install tmux git vim gvim maven util-linux-user zsh rsync dpkg gnupg
+RUN dnf -y install tree
 
 RUN dnf -y install firefox
 RUN dnf -y install chromium
 
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
 RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' 
-RUN dnf check-update
+RUN dnf -y update
 RUN dnf -y install code
 
 
@@ -88,6 +89,7 @@ RUN set -ex \
 
 # set bigger font for gnome
 RUN su nhan2 -c "gsettings set org.gnome.desktop.interface text-scaling-factor 1.5"
+RUN ln -s /home /Users
 
 USER nhan2
 ENV HOME /home/nhan2
