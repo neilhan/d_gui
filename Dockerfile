@@ -22,8 +22,11 @@ RUN dnf -y install code
 # !!! Please replace nhan2 with your User and Group !!!
 RUN export username=nhan2 \
   && groupadd --gid 1000 $username \
-  && useradd --uid 1000 --gid $username --shell /usr/bin/zsh --create-home $username \
+  && useradd --uid 1000 --gid 1000 --shell /usr/bin/zsh --create-home $username \
   && usermod $username -a -G wheel 
+
+RUN dnf -y install passwd libuser   
+RUN echo nhan2 | /usr/bin/passwd nhan2 --stdin  
 
 # install pulse secure VPN --------------------------
 RUN dnf -y install ca-certificates
