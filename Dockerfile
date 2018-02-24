@@ -25,6 +25,7 @@ RUN export username=nhan2 \
   && useradd --uid 1000 --gid 1000 --shell /usr/bin/zsh --create-home $username \
   && usermod $username -a -G wheel 
 
+# set user password so that sudo works
 RUN dnf -y install passwd libuser   
 RUN echo nhan2 | /usr/bin/passwd nhan2 --stdin  
 
