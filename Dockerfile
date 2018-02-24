@@ -1,4 +1,4 @@
-FROM docker.io/fedora
+FROM docker.io/fedora:26
 MAINTAINER http://fedoraproject.org/wiki/Cloud
 
 # RUN label is for atomic cli, allows for ease of use
@@ -7,7 +7,7 @@ LABEL RUN='docker run -d -p 5901:5901 -v /etc/machine-id:/etc/machine-id:ro $IMA
 # Install the appropriate software
 RUN dnf -y update 
 RUN dnf -y groupinstall gnome-desktop
-RUN dnf -y install tmux git vim gvim maven util-linux-user zsh rsync dpkg gnupg
+RUN dnf -y install tmux git vim gvim maven util-linux-user zsh rsync dpkg gnupg sudo wget
 RUN dnf -y install tree
 
 RUN dnf -y install firefox
@@ -25,9 +25,17 @@ RUN export username=nhan2 \
   && useradd --uid 1000 --gid $username --shell /usr/bin/zsh --create-home $username \
   && usermod $username -a -G wheel 
 
+# install pulse secure VPN --------------------------
+RUN dnf -y install ca-certificates
+RUN update-ca-trust force-enable
+RUN update-ca-trust extract
+RUN su nhan2 -c "mkdir /home/nhan2/temp"
+RUN wget -O /home/nhan2/temp/ps.rpm http://trial.pulsesecure.net/clients/ps-pulse-linux-5.3r3.0-b1021-centos-rhel-64-bit-installer.rpm
+RUN dnf -y install /home/nhan2/temp/ps.rpm
+RUN /usr/local/pulse/PulseClient_x86_64.sh install_dependency_packages
 
-# node.js 6 install
-# ----------------------------------------------------
+
+# node.js 6 install ---------------------------------------
 # copy from docker node 6.11 ------
 # RUN groupadd --gid 1000 node \
 #   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
