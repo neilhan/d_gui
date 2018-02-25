@@ -20,10 +20,13 @@ docker run --rm -it \
         --volume="/home/nhan2/Downloads:/home/nhan2/Downloads" \
         --volume="/home/nhan2/Projects:/home/nhan2/Projects" \
         --volume="/home/nhan2/.m2:/home/nhan2/.m2" \
+	--volume="/home/nhan2/.ssh:/home/nhan2/.ssh" \
+	--volume="/home/nhan2/.zshrc:/home/nhan2/.zshrc" \
+	--volume="/home/nhan2/.bashrc:/home/nhan2/.bashrc" \
 	--volume="/home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3" \
         --workdir="/home/$USER" \
 	--privileged \
-	d_gui # /usr/bin/zsh # /usr/bin/gnome-terminal # /usr/bin/firefox # chromium-browser
+	d_gui /usr/bin/tilix  # /usr/bin/firefox # chromium-browser
 
 	# -v $HOME/.config/app:/root/.config/app \
 
