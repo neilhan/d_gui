@@ -1,0 +1,35 @@
+version: '2.0'
+
+services:
+
+  work_gui:
+    build: ./container
+    hostname: work_gui
+    container_name: work_gui
+    network_mode: host
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /etc/localtime:/etc/localtime:ro 
+      - /etc/hosts:/etc/hosts:ro 
+      - /dev/shm:/dev/shm 
+      - ./home:/home
+      - /home/nhan2/bin:/home/nhan2/bin
+      - /home/nhan2/Downloads:/home/nhan2/Downloads
+      - /home/nhan2/Projects:/home/nhan2/Projects
+      - /home/nhan2/.m2:/home/nhan2/.m2
+      - /home/nhan2/.ssh:/home/nhan2/.ssh
+      - /home/nhan2/.zshrc:/home/nhan2/.zshrc
+      - /home/nhan2/.bashrc:/home/nhan2/.bashrc
+      - /home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3
+    devices:
+      - "/dev/dri:/dev/dri"
+      - "/dev/snd:/dev/snd"
+      - "/dev/video0:/dev/video0"
+      - "/dev/input:/dev/input"
+    user: $USER
+    working_dir: /home/$USER
+    privileged: true
+    environment:
+      - DISPLAY 
+    entrypoint: /bin/bash -c " /home/nhan2/bin/start_ide.sh ; /usr/bin/tilix"  # /usr/bin/firefox # chromium-browser
+
