@@ -10,7 +10,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /etc/localtime:/etc/localtime:ro 
-      - /etc/hosts:/etc/hosts:ro 
+      - /etc/hosts:/etc/hosts
       - /dev/shm:/dev/shm 
       - ./home:/home
       - /home/nhan2/bin:/home/nhan2/bin
@@ -21,6 +21,7 @@ services:
       - /home/nhan2/.zshrc:/home/nhan2/.zshrc
       - /home/nhan2/.bashrc:/home/nhan2/.bashrc
       - /home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3
+      - /home/nhan2/.config/Code:/home/nhan2/.config/Code
     devices:
       - "/dev/dri:/dev/dri"
       - "/dev/snd:/dev/snd"
@@ -31,5 +32,6 @@ services:
     privileged: true
     environment:
       - DISPLAY 
-    entrypoint: /bin/bash -c " /home/nhan2/bin/start_ide.sh ; /usr/bin/tilix"  # /usr/bin/firefox # chromium-browser
+    entrypoint: /usr/bin/bash # /usr/bin/tilix   # /usr/bin/firefox # chromium-browser
+    # /home/nhan2/bin/start_ide.sh 
 
