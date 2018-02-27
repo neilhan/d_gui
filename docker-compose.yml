@@ -22,6 +22,7 @@ services:
       - /home/nhan2/.bashrc:/home/nhan2/.bashrc
       - /home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3
       - /home/nhan2/.config/Code:/home/nhan2/.config/Code
+      - /home/nhan2/.gitconfig:/home/nhan2/.gitconfig
     devices:
       - "/dev/dri:/dev/dri"
       - "/dev/snd:/dev/snd"
