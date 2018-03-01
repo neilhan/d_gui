@@ -16,17 +16,17 @@ docker run --rm -it \
         --user=$USER \
 	--volume="/dev/shm:/dev/shm" \
         --volume="$PWD/home:/home" \
-        --volume="/home/nhan2/bin:/home/nhan2/bin" \
-        --volume="/home/nhan2/Downloads:/home/nhan2/Downloads" \
-        --volume="/home/nhan2/Projects:/home/nhan2/Projects" \
-        --volume="/home/nhan2/.m2:/home/nhan2/.m2" \
-	--volume="/home/nhan2/.ssh:/home/nhan2/.ssh" \
-	--volume="/home/nhan2/.zshrc:/home/nhan2/.zshrc" \
-	--volume="/home/nhan2/.bashrc:/home/nhan2/.bashrc" \
-	--volume="/home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3" \
-        --workdir="/home/$USER" \
+        --volume="/home/nhan2/bin:/home/gui/bin" \
+        --volume="/home/nhan2/Downloads:/home/gui/Downloads" \
+        --volume="/home/nhan2/Projects:/home/gui/Projects" \
+        --volume="/home/nhan2/.m2:/home/gui/.m2" \
+	--volume="/home/nhan2/.ssh:/home/gui/.ssh" \
+	--volume="/home/nhan2/.zshrc:/home/gui/.zshrc" \
+	--volume="/home/nhan2/.bashrc:/home/gui/.bashrc" \
+	--volume="/home/nhan2/.IdeaIC2017.3:/home/gui/.IdeaIC2017.3" \
+        --workdir="/home/gui" \
 	--privileged \
-	d_gui /usr/bin/tilix  # /usr/bin/firefox # chromium-browser
+	d_gui /usr/bin/bash  # /usr/bin/firefox # chromium-browser
 
 	# -v $HOME/.config/app:/root/.config/app \
 

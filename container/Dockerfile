@@ -8,38 +8,33 @@ LABEL RUN='docker run -d -p 5901:5901 -v /etc/machine-id:/etc/machine-id:ro $IMA
 RUN dnf -y update 
 RUN dnf -y groupinstall gnome-desktop
 RUN dnf -y install tmux git vim gvim maven util-linux-user rsync dpkg gnupg sudo wget
-RUN dnf -y install tree tilix
+RUN dnf -y install tree tilix zsh
 
 RUN dnf -y install firefox
 RUN dnf -y install chromium
 
 RUN echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf 
 
-# ---------------------------------------------------------
-# install vscode 
-RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
-RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' 
-RUN dnf -y update
-RUN dnf -y install code
 
-
-# !!! Please replace nhan2 with your User and Group !!!
-RUN export username=nhan2 \
+# user name set to gui
+# ------------------------------------------------------
+RUN export username=gui \
   && groupadd --gid 1000 $username \
   && useradd --uid 1000 --gid 1000 --shell /usr/bin/bash --create-home $username \
   && usermod $username -a -G wheel 
 
-# set user password so that sudo works
+# set user password so that sudo works, password is "gui"
 RUN dnf -y install passwd libuser   
-RUN echo nhan2 | /usr/bin/passwd nhan2 --stdin  
+RUN echo gui | /usr/bin/passwd gui --stdin  
+RUN chown -R gui:gui /home/gui
 
 # install pulse secure VPN --------------------------
 RUN dnf -y install ca-certificates
 RUN update-ca-trust force-enable
 RUN update-ca-trust extract
-RUN su nhan2 -c "mkdir /home/nhan2/temp"
-RUN wget -O /home/nhan2/temp/ps.rpm http://trial.pulsesecure.net/clients/ps-pulse-linux-5.3r3.0-b1021-centos-rhel-64-bit-installer.rpm
-RUN dnf -y install /home/nhan2/temp/ps.rpm
+RUN su gui -c "mkdir /home/gui/temp"
+RUN wget -O /home/gui/temp/ps.rpm http://trial.pulsesecure.net/clients/ps-pulse-linux-5.3r3.0-b1021-centos-rhel-64-bit-installer.rpm
+RUN dnf -y install /home/gui/temp/ps.rpm
 RUN /usr/local/pulse/PulseClient_x86_64.sh install_dependency_packages
 
 
@@ -104,11 +99,11 @@ RUN set -ex \
 # node 6 ends // ----------------------------------------------------
 
 # set bigger font for gnome
-RUN su nhan2 -c "gsettings set org.gnome.desktop.interface text-scaling-factor 1.5"
+RUN su gui -c "gsettings set org.gnome.desktop.interface text-scaling-factor 1.5"
 RUN ln -s /home /Users
 
-USER nhan2
-ENV HOME /home/nhan2
+USER gui
+ENV HOME /home/gui
 CMD /usr/bin/bash
 # CMD    ["vncserver", "-fg" ]
 # ENTRYPOINT ["vncserver", "-fg" ]

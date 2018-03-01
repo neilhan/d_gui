@@ -13,23 +13,24 @@ services:
       - /etc/hosts:/etc/hosts
       - /dev/shm:/dev/shm 
       - ./home:/home
-      - /home/nhan2/bin:/home/nhan2/bin
-      - /home/nhan2/Downloads:/home/nhan2/Downloads
-      - /home/nhan2/Projects:/home/nhan2/Projects
-      - /home/nhan2/.m2:/home/nhan2/.m2
-      - /home/nhan2/.ssh:/home/nhan2/.ssh
-      - /home/nhan2/.zshrc:/home/nhan2/.zshrc
-      - /home/nhan2/.bashrc:/home/nhan2/.bashrc
-      - /home/nhan2/.IdeaIC2017.3:/home/nhan2/.IdeaIC2017.3
-      - /home/nhan2/.config/Code:/home/nhan2/.config/Code
-      - /home/nhan2/.gitconfig:/home/nhan2/.gitconfig
+      - $HOME/bin:/home/gui/bin
+      - $HOME/Downloads:/home/gui/Downloads
+      - $HOME/Projects:/home/gui/Projects
+      - $HOME/.m2:/home/gui/.m2
+      - $HOME/.ssh:/home/gui/.ssh
+      - $HOME/.zshrc:/home/gui/.zshrc
+      - $HOME/.bashrc:/home/gui/.bashrc
+      - $HOME/.sharedrc:/home/gui/.sharedrc
+      - $HOME/.IdeaIC2017.3:/home/gui/.IdeaIC2017.3
+      - $HOME/.config/Code:/home/gui/.config/Code
+      - $HOME/.gitconfig:/home/gui/.gitconfig
     devices:
       - "/dev/dri:/dev/dri"
       - "/dev/snd:/dev/snd"
       - "/dev/video0:/dev/video0"
       - "/dev/input:/dev/input"
-    user: $USER
-    working_dir: /home/$USER
+    user: gui
+    working_dir: /home/gui
     privileged: true
     environment:
       - DISPLAY 
